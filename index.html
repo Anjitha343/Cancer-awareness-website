@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cancer Awareness & Support</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    
+    <section class="hero">
+        <img src="girl.jpg" alt="Cancer Awareness Banner">
+        <h1>Join the Fight Against Cancer</h1>
+        <p>Together, we can spread awareness, support patients, and inspire hope.</p>
+    </section>
+
+    
+    <div class="quotesection">
+        <div id="quote">Loading inspirational message...</div>
+    </div>
+
+    
+    <div class="login">
+        <h3>Get in Touch</h3>
+        <form>
+            <label>Name</label>
+            <input type="text">
+
+            <label>Email</label>
+            <input type="email">
+
+            <label>Message</label>
+            <textarea rows="4" cols="45"></textarea>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+<script>
+const apiKey = "+/D5W3DRhmkgD1rbnXv7nQ==r8UM05wGboq965Yf";
+
+async function fetchdata() {
+  try {
+    const response = await fetch(
+      'https://api.api-ninjas.com/v2/quotes?category=inspirational',
+      { headers: { 'X-Api-Key': apiKey } }
+    );
+    const data = await response.json();
+    displayData(data);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
+
+function displayData(data) {
+  const apidataElement = document.getElementById('quote');
+  if (data.length > 0) {
+    apidataElement.innerHTML = `
+      <p>"${data[0].quote}"</p>
+      <small>— ${data[0].author}</small>
+    `;
+  }
+}
+
+fetchdata();
+</script>
+</body>
+</html>
